@@ -15,10 +15,12 @@ namespace Builder_Pattern
             };
 
             var inventorybuilder = new DailyReportBuilder(items);
-            var director = new InventoryBuildDirector(inventorybuilder);
-            director.BuildCompleteReport();
-            var directReport = inventorybuilder.GetDailyReport();
-            Console.WriteLine(directReport.Debug());
+            //var director = new InventoryBuildDirector(inventorybuilder);
+            //director.BuildCompleteReport();
+            //var directReport = inventorybuilder.GetDailyReport();
+            //Console.WriteLine(directReport.Debug());
+            var fluentReport = inventorybuilder.AddTitle().AddDimensions().AddLogistics(DateTime.Now).GetDailyReport();
+            Console.WriteLine(fluentReport.Debug());
         }
     }
 }
