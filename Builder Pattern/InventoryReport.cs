@@ -69,7 +69,7 @@ namespace Builder_Pattern
             _report.DimensionsSection = string.Join(Environment.NewLine, _items.Select(product => 
                 $"Product: {product.Name}\n" +
                 $"Price: {product.Price}\n" +
-                $"Height: {product.Height} x\n" +
+                $"Height: {product.Height} x " +
                 $"Width: {product.Width} -> Weight: {product.Weight} lbs\n"
             ));
         }
@@ -89,6 +89,23 @@ namespace Builder_Pattern
             InventoryReport finishedReport = _report;
             Reset();
             return finishedReport;
+        }
+    }
+
+    public class InventoryBuildDirector
+    {
+        private IFurnitureInventoryBuilder _builder;
+
+        public InventoryBuildDirector(IFurnitureInventoryBuilder concreteBuilder)
+        {
+            _builder = concreteBuilder;
+        }
+
+        public void BuildCompleteReport()
+        {
+            _builder.AddTitle();
+            _builder.AddDimensions();
+            _builder.AddLogistics(DateTime.Now);
         }
     }
 }
